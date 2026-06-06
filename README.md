@@ -8,7 +8,7 @@ A hybrid desktop music player for Windows that searches across YouTube and Deeze
 
 No setup required — grab the installer from the Releases page:
 
-1. Go to the **[Releases](https://github.com/YOUR_USERNAME/YOUR_REPO/releases)** page
+1. Go to the **[Releases](https://github.com/dinoindahood/GeckTrack/releases)** page
 2. Download `GeckTrack Setup 0.0.1.exe` (or the latest version)
 3. Run it — done. No Python, no pip, no ffmpeg needed on your end.
 
