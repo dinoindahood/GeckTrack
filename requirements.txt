@@ -1,0 +1,19 @@
+# Install these with:  pip install -r requirements.txt
+# (tkinter is NOT listed here — it comes with Python)
+
+yt-dlp          # YouTube search + download
+py-deezer       # Deezer search + download
+pygame          # audio playback on PC
+ffmpeg-python   # audio conversion (YouTube → MP3)
+
+# NOTE: ffmpeg also needs to be installed as a system binary (not just pip):
+#   Windows: https://ffmpeg.org/download.html  → add to PATH
+#   Mac:     brew install ffmpeg
+#   Linux:   sudo apt install ffmpeg
+pydeezer
+flet
+flask
+flask-cors
+groq
+requests
+python-dotenv
