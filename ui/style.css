@@ -1,0 +1,433 @@
+/* --- THE FLUFFY GECKO CUSTOM THEME --- */
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap');
+
+:root {
+  /* LIGHT MODE (Minty Moss) */
+  --bg-color: #FAF8F5;
+  --panel-bg: #FFFFFF;
+  --text-color: #8D6E63;
+  --btn-text-color: #8D6E63; /* Keep button text dark & readable */
+  --accent-color: #A8E6CF;
+  --accent-hover: #85C9B1;
+  --danger-color: #E77A7A;
+  --border-color: #8D6E63;
+  --shadow-color: rgba(141, 110, 99, 0.2);
+}
+
+.dark-theme {
+  /* DARK MODE (Deep Plum & Peach) */
+  --bg-color: #2A2633;
+  --panel-bg: #1C1922;
+  --text-color: #FAF8F5;
+  --btn-text-color: #121017; /* Dark plum text on peach buttons */
+  --accent-color: #FFD3B6;
+  --accent-hover: #EBA883;
+  --danger-color: #E77A7A;
+  --border-color: #121017;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Pixelify Sans', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* --- THE SQUISHY BUTTONS --- */
+button {
+  background: var(--accent-color);
+  color: var(--btn-text-color);
+  border: 3px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--border-color);
+  transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
+}
+
+button:hover { background: var(--accent-hover); }
+
+button:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--border-color);
+}
+
+button:disabled {
+  background: var(--panel-bg);
+  color: var(--border-color);
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 4px 0 var(--border-color);
+}
+
+/* --- FIX: MENU ITEMS & ICONS (No squish, no borders!) --- */
+.dropdown-item, .song-menu-btn, .icon-btn {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transform: none !important;
+  border-radius: 0;
+  color: var(--text-color);
+  font-size: 16px;
+  padding: 8px;
+  text-align: left;
+  width: 100%;
+}
+.dropdown-item:hover {
+  background: var(--accent-color);
+  color: var(--btn-text-color);
+}
+.song-menu-btn { width: auto; font-weight: bold; }
+.song-menu-btn:hover, .icon-btn:hover { background: transparent; opacity: 1; }
+
+/* --- FIX: PLAYLIST SIDEBAR BUTTONS --- */
+.playlist-btn {
+  background: transparent;
+  border: 3px solid transparent;
+  box-shadow: none;
+  color: var(--text-color);
+  text-align: left;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: 0.2s;
+  font-family: inherit;
+  font-size: 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  /* THE FIX: Let it share space, but allow it to shrink below its text size! */
+  flex-grow: 1;
+  min-width: 0;
+}
+/* --- FIX: EXACTLY 80PX TRUNCATION --- */
+.playlist-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px; /* Explicit limit so it never pushes the pencil! */
+  display: inline-block; /* Required to make max-width work on text */
+  vertical-align: middle; /* Keeps the text lined up with the icon */
+}
+.playlist-btn:hover { background: var(--shadow-color); }
+
+.playlist-btn.active {
+  background: transparent;
+  color: var(--text-color);
+  border: 3px solid var(--border-color); /* Just outlined! */
+  box-shadow: none; /* No shadow = no top clipping! */
+  transform: none; /* Stops it from bouncing into the ceiling */
+}
+
+/* --- FIX: AI SUGGESTION STYLING --- */
+.ai-header {
+  width: auto; /* Removes the 100% width so it sits inline */
+  font-size: 20px;
+  color: var(--text-color);
+  margin-bottom: 0;
+  margin-right: 10px; /* Space between text and first button */
+}
+
+/* New custom class just for suggestion tags! */
+.ai-btn {
+  background: transparent;
+  color: var(--text-color); /* Automatically handles Light/Dark mode text! */
+  border: 3px solid var(--border-color);
+  box-shadow: none;
+  border-radius: 12px;
+  padding: 6px 16px;
+  font-size: 16px;
+  transform: none !important; /* Disables the physical squish */
+  transition: 0.2s;
+}
+
+.ai-btn:hover {
+  background: var(--shadow-color);
+}
+
+/* --- NAVIGATION --- */
+.nav-tabs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  border-bottom: 3px solid var(--border-color);
+  padding-bottom: 10px;
+  align-items: center;
+}
+
+.nav-btn {
+  background: var(--panel-bg);
+  color: var(--text-color); /* FIX: Forces inactive tabs to use the readable light text! */
+  box-shadow: 0 4px 0 var(--border-color);
+}
+
+.nav-btn.active {
+  background: var(--accent-color);
+  color: var(--btn-text-color); /* Flips back to dark text when the peach background turns on */
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--border-color);
+}
+
+/* --- INPUTS & SEARCH BAR --- */
+input[type=text], select {
+  padding: 10px;
+  border-radius: 12px;
+  border: 3px solid var(--border-color);
+  background: var(--panel-bg);
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: 18px;
+  box-shadow: inset 0 3px 0 var(--shadow-color);
+  width: 100%;
+  box-sizing: border-box;
+}
+input[type=text]:focus, select:focus {
+  outline: none;
+  background: var(--bg-color); /* FIX: Uses your theme's background instead of harsh white */
+  border-color: var(--accent-color); /* Gives the border a nice pop when you click it! */
+}
+
+/* --- PANELS & SCREENS --- */
+.screen { display: none; flex-grow: 1; overflow-y: auto; }
+.screen.active { display: block; }
+
+.fluffy-panel {
+  background: var(--panel-bg);
+  border: 3px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 4px 4px 0 var(--shadow-color);
+}
+
+/* --- FIX: SONG ROWS TRUNCATION --- */
+.song-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  border-bottom: 2px dashed var(--border-color);
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  min-width: 0; /* Required for text truncation */
+}
+
+.song-row:hover {
+  background: var(--panel-bg);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 0 var(--shadow-color);
+  border-bottom: 2px solid transparent;
+}
+
+.active-row {
+  background: var(--accent-color) !important;
+  border: 3px solid var(--border-color) !important;
+  border-radius: 12px;
+}
+
+.song-text {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 10px;
+  min-width: 0; /* Required for text truncation */
+}
+
+/* --- CHUNKY SLIDERS --- */
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 12px;
+  background: linear-gradient(to right, var(--accent-color) var(--progress-pct), var(--panel-bg) var(--progress-pct));
+
+  border: 3px solid var(--border-color);
+  border-radius: 6px;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 16px;
+  border-radius: 4px;
+  background: var(--text-color);
+  cursor: pointer;
+  margin-top: -9px;
+}
+
+/* --- MODALS --- */
+.fluffy-modal-content {
+  background: var(--bg-color);
+  padding: 20px;
+  border-radius: 16px;
+  width: 320px;
+  border: 4px solid var(--border-color);
+  box-shadow: 8px 8px 0 var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#bulk-bar {
+  background: var(--accent-color);
+  border: 3px solid var(--border-color);
+  box-shadow: 0 4px 0 var(--shadow-color);
+}
+#btn-bulk-delete, #player-opt-del { color: var(--danger-color); }
+#btn-bulk-delete:hover { background: var(--danger-color); color: white; }
+
+/* --- THE THREE-DOT CONTEXT MENU --- */
+.song-menu-container {
+  position: relative; /* This keeps the dropdown anchored to the dots! */
+  display: flex;
+  align-items: center;
+}
+
+.song-menu-btn {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transform: none !important;
+  border-radius: 0;
+  color: var(--text-color);
+  font-size: 24px; /* Make dots a bit bigger and easier to click */
+  padding: 0 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.song-menu-btn:hover {
+  background: transparent;
+  opacity: 0.7; /* Soft fade instead of a background color */
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%; /* Opens right below the dots */
+  background: var(--panel-bg);
+  border: 3px solid var(--border-color);
+  box-shadow: 4px 4px 0 var(--shadow-color);
+  border-radius: 12px;
+  z-index: 1000; /* Keeps it floating ON TOP of everything else */
+  display: flex;
+  flex-direction: column; /* Stacks the buttons vertically! */
+  min-width: 180px;
+  padding: 5px 0;
+  overflow: hidden; /* Keeps hover effects inside the fluffy corners */
+}
+
+/* Make sure the Player menu opens UPwards instead of downwards */
+#player-dropdown {
+  bottom: 100%;
+  top: auto;
+  margin-bottom: 10px;
+}
+
+.dropdown-item {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transform: none !important;
+  border-radius: 0;
+  color: var(--text-color);
+  font-size: 16px;
+  padding: 10px 15px;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: var(--accent-color);
+  color: var(--btn-text-color);
+}
+
+/* --- MAGIC SUGGEST & DOWNLOAD LOGIC --- */
+#btn-magic-suggest { border-radius: 12px !important; font-size: 20px !important; }
+.btn-downloading { animation: pulse 1.5s infinite; pointer-events: none; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+/* --- FIX: PREVENT BUTTONS FROM SQUISHING --- */
+button, .song-menu-container {
+  flex-shrink: 0;
+}
+
+/* --- FIX: MULTI-SELECT MODE TOGGLE --- */
+.song-checkbox {
+  display: none; /* Hidden by default! */
+  margin-right: 10px;
+  cursor: pointer;
+  transform: scale(1.5);
+  background: var(--panel-bg);
+  color: var(--text-color);
+}
+
+/* When we add this class via JS, the checkboxes appear */
+.selection-mode-active .song-checkbox {
+  display: inline-block;
+}
+/* --- PIXEL ART HELPER --- */
+.pixel-art {
+  image-rendering: pixelated; /* Keeps your custom PNGs crisp! */
+  object-fit: contain;
+}
+
+/* --- BRAND BUTTONS (Ignores Light/Dark Theme) --- */
+.btn-youtube {
+  background: #E74C3C !important; /* Softer Retro Red */
+  color: #FFFFFF !important;
+  border-color: #8C241A !important;
+}
+.btn-youtube:hover { background: #C0392B !important; }
+
+.btn-spotify {
+  background: #2ECC71 !important; /* Retro Spotify Green */
+  color: #121017 !important; /* Dark text */
+  border-color: #1E8449 !important;
+}
+.btn-spotify:hover { background: #27AE60 !important; }
+
+/* --- SHUFFLE & AI BUTTON STATES --- */
+#shuffle-btn, #btn-magic-suggest, #btn-toggle-select, #btn-refresh {
+  background: var(--panel-bg);
+  color: var(--text-color);
+}
+
+#shuffle-btn.active {
+  background: var(--accent-color);
+  color: var(--btn-text-color);
+}
+/* --- FIX: OVERLAPPING MODALS & INVISIBLE CANCEL BUTTONS --- */
+
+/* 1. Force ALL modals to the absolute highest layer (99999 beats the row's 9999) */
+div[id$="-modal"] {
+  z-index: 99999 !important;
+}
+
+/* 2. Force ALL Cancel buttons to use the readable text color */
+button[id^="btn-cancel-"] {
+  background: transparent !important;
+  color: var(--text-color) !important; /* Forces soft cream in dark mode! */
+  border-color: var(--border-color) !important;
+}
+
+button[id^="btn-cancel-"]:hover {
+  background: var(--shadow-color) !important; /* Soft highlight when hovered */
+}
